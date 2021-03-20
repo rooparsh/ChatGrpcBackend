@@ -5,6 +5,7 @@ option java_multiple_files = true;
 option java_outer_classname = "ChatProto";
 
 import "me/anmolverma/users/User.proto";
+import "google/protobuf/empty.proto";
 
 message ChatGroup {
   Users users = 1;
@@ -21,7 +22,26 @@ message ChatGroupResponse {
   Response opResponse = 2;
 }
 
+message ChatMessage{
+  string uuid = 1;
+  string message = 2;
+  bytes fileMessage = 3;
+}
+
+message Presence{
+  string userId = 1;
+  Availability availability = 2;
+}
+
+enum Availability{
+  AVAILABLE = 0;
+  TYPING = 1;
+  GONE = 2;
+}
+
 service ChatService {
   rpc createGroup(ChatGroup) returns(ChatGroupResponse);
   rpc deleteGroup(ChatGroup) returns(ChatGroupResponse);
+  rpc sendMessage(stream ChatMessage) returns(google.protobuf.Empty);
+  rpc sendPresence(stream Presence) returns(google.protobuf.Empty);
 }

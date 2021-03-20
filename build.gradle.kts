@@ -12,6 +12,7 @@ version = "1.0-SNAPSHOT"
 
 
 sourceSets.main {
+    resources.srcDir("src/main/proto")
     withConvention(org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet::class) {
         kotlin.srcDirs("build/generated/source/proto/main/grpc",
             "build/generated/source/proto/main/grpckt",
