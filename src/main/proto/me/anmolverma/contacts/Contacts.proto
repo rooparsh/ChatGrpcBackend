@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_package = "me.anmolverma.contacts";
+option java_multiple_files = true;
+option java_outer_classname = "ContactsProto";
+
+import "me/anmolverma/users/User.proto";
+
+message Contact{
+  string uuid = 1;
+  string name = 2;
+  string phone = 3;
+}
+
+message UserContacts{
+  User user = 1;
+  repeated Contact contacts = 2;
+}
+
+service ContactService{
+  rpc uploadUserContacts(UserContacts) returns(Response);
+}

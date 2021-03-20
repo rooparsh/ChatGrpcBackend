@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_package = "me.anmolverma.chat";
+option java_multiple_files = true;
+option java_outer_classname = "ChatProto";
+
+import "me/anmolverma/users/User.proto";
+
+message ChatGroup {
+  Users users = 1;
+  string groupName = 2;
+  string groupDescription = 3;
+  string groupImage = 4;
+  string groupJoinUri = 5;
+  repeated string adminUserIds = 6;
+}
