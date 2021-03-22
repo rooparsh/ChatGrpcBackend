@@ -26,11 +26,17 @@ message ChatMessage{
   string uuid = 1;
   string message = 2;
   bytes fileMessage = 3;
+  string groupId = 4;
+  string userId = 5;
 }
 
 message Presence{
   string userId = 1;
   Availability availability = 2;
+}
+
+message FindChatGroup{
+  ChatGroup chatGroup = 1;
 }
 
 enum Availability{
@@ -41,7 +47,8 @@ enum Availability{
 
 service ChatService {
   rpc createGroup(ChatGroup) returns(ChatGroupResponse);
+  rpc fetchGroup(FindChatGroup)returns(ChatGroupResponse);
   rpc deleteGroup(ChatGroup) returns(ChatGroupResponse);
-  rpc sendMessage(stream ChatMessage) returns(google.protobuf.Empty);
-  rpc sendPresence(stream Presence) returns(google.protobuf.Empty);
+  rpc sendMessage(stream ChatMessage) returns(Response);
+  rpc sendPresence(stream Presence) returns(Response);
 }

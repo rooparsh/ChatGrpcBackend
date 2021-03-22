@@ -4,6 +4,7 @@ import com.google.protobuf.gradle.*
 plugins {
     application
     kotlin("jvm") version "1.4.31"
+    kotlin("kapt") version "1.4.31"
     id("com.google.protobuf") version "0.8.15"
 }
 
@@ -51,9 +52,20 @@ dependencies {
     implementation("io.grpc:grpc-protobuf:1.36.0")
     implementation("io.grpc:grpc-kotlin-stub:1.0.0")
     implementation("com.google.protobuf:protobuf-java:3.15.3")
+
     implementation("io.jsonwebtoken:jjwt:0.9.1")
+
     implementation("com.google.guava:guava:30.1-jre")
+
     implementation("javax.annotation:javax.annotation-api:1.3.2")
+
+    implementation("org.mongodb:mongo-java-driver:3.0.3")
+    val dagger_version = "2.33"
+    implementation("com.google.dagger:dagger:${dagger_version}")
+    kapt("com.google.dagger:dagger-compiler:${dagger_version}")
+
+
+    runtimeOnly("javax.xml.bind:jaxb-api:2.3.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -80,6 +92,7 @@ tasks.withType<Jar> {
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
