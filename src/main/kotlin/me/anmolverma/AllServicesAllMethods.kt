@@ -10,6 +10,9 @@ import java.util.logging.Logger
 import me.anmolverma.MainGrpcClient.buildClientSslContext
 import me.anmolverma.chat.ChatGroup
 import me.anmolverma.chat.ChatServiceGrpc
+import me.anmolverma.services.users.SocialType
+import me.anmolverma.services.users.User
+import me.anmolverma.services.users.UsersServiceGrpc
 
 
 /**
@@ -19,7 +22,10 @@ class AllServicesAllMethods internal constructor(
     private val callCredentials: CallCredentials?,
     private val channel: ManagedChannel
 ) {
-    private val productServiceBlockingStub: ChatServiceGrpc.ChatServiceBlockingStub = ChatServiceGrpc.newBlockingStub(channel)
+    private val productServiceBlockingStub: ChatServiceGrpc.ChatServiceBlockingStub =
+        ChatServiceGrpc.newBlockingStub(channel)
+    private val userServiceBlockingStub: UsersServiceGrpc.UsersServiceBlockingStub =
+        UsersServiceGrpc.newBlockingStub(channel)
 
     /**
      * Construct client for accessing GreeterGrpc server.
@@ -45,11 +51,19 @@ class AllServicesAllMethods internal constructor(
      */
     fun createGroup(logger: Logger): String {
         // Use a stub with the given call credentials applied to invoke the RPC.
-        val response = productServiceBlockingStub
+        val response = userServiceBlockingStub
             .withCallCredentials(callCredentials)
-            .createGroup(ChatGroup.getDefaultInstance())
-        logger.info("Greeting: " + response.opResponse.message)
-        return response.opResponse.message
+            .registerUser(
+                User.newBuilder()
+                    .setUname("anmol92verma")
+                    .setEmail("anmol.verma4@gmail.com")
+                    .setPhone("+918284854837")
+                    .setId(1)
+                    .setSocialTypeValue(SocialType.EMAIL_VALUE)
+                    .setDisplayName("ANmolVerma")
+                    .build()
+            )
+        return response.response.message
     }
 
 }

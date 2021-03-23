@@ -24,7 +24,7 @@ object MainGrpcClient {
         val credentials: CallCredentials = JwtCredential(clientId)
         val client = AllServicesAllMethods(credentials, host, port)
         try {
-            client.createGroup(logger)
+            print(client.createGroup(logger))
         }
         catch (ex:Exception){
             ex.printStackTrace()

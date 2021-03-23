@@ -58,8 +58,9 @@ dependencies {
     implementation("com.google.guava:guava:30.1-jre")
 
     implementation("javax.annotation:javax.annotation-api:1.3.2")
+    implementation("org.litote.kmongo:kmongo-coroutine:4.2.5")
+    implementation("org.slf4j:slf4j-log4j12:1.7.29")
 
-    implementation("org.mongodb:mongo-java-driver:3.0.3")
     val dagger_version = "2.33"
     implementation("com.google.dagger:dagger:${dagger_version}")
     kapt("com.google.dagger:dagger-compiler:${dagger_version}")

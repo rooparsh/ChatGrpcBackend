@@ -1,9 +1,9 @@
-package me.anmolverma.chat.services
+package me.anmolverma.services.chat
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import me.anmolverma.chat.*
-import me.anmolverma.users.Response
+import me.anmolverma.services.users.Response
 
 class ChatService : ChatServiceGrpcKt.ChatServiceCoroutineImplBase(Dispatchers.IO) {
     override suspend fun createGroup(request: ChatGroup): ChatGroupResponse {
